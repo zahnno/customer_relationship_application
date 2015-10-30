@@ -12,24 +12,24 @@ class Contact
 		@@id += 1
 	end
 
-	def create(first_name, last_name, options = {})
+	def self.create(first_name, last_name, options = {})
     new_contact = Contact.new(first_name, last_name, options)
     @@contacts << new_contact
     end
 
-    def modify_contact
+    def self.modify_contact
     end
 
-    def display_all_contact
+    def self.display_all_contact
     end
 
-    def display_contact
+    def self.display_contact
     end
 
-    def display_attribute
+    def self.display_attribute
     end
 
-    def delete_contact
+    def self.delete_contact
     end
 
 end
