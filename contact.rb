@@ -1,8 +1,11 @@
 class Contact
 	attr_accessor :first_name, :last_name, :email, :notes, :id
+
+    #setting empty arrays
 	@@contacts = []
 	@@id = 1
     
+    #initializing contact through first name, last name, email and notes
 	def initialize(first_name, last_name, options = {})
 		@first_name = first_name
 		@last_name = last_name
@@ -11,12 +14,14 @@ class Contact
 		@id = @@id
 		@@id += 1
 	end
-
+    
+    #creating contacts
 	def self.create(first_name, last_name, options = {})
     new_contact = Contact.new(first_name, last_name, options)
     @@contacts << new_contact
     end
-
+    
+    #Prompting user of whether they are sure they would like to modify the contact"
     def self.modify_contact_check
         puts "Please provide ID for Contact."
         @id_check = gets.to_i
@@ -28,7 +33,8 @@ class Contact
             return
         end
     end
-
+    
+    #modifying contact info by prompting user to chose which attr to change
     def self.modify_contact
         puts "1) Change first name."
         puts "2) Change last name."
@@ -37,19 +43,20 @@ class Contact
         puts "5) Quit."
         choice = gets.to_i
         if choice == 1
-            change_first
+            Contact.change_first
         elsif choice == 2
-            change_last
+            Contact.change_last
         elsif choice == 3
-            change_email
+            Contact.change_email
         elsif choice == 4
-            change_notes
+            Contact.change_notes
         elsif choice == 5
             return
         end
     end
-
-    def change_first
+    
+    #changing first name passed by modify_contact
+    def self.change_first
         puts "Enter new first name."
         new_first_name = gets.chomp
         @@contacts.each do |contact|
@@ -58,8 +65,9 @@ class Contact
             end
         end
     end
-
-    def change_last
+    
+    #changing last name passed by modify_contact
+    def self.change_last
         puts "Enter new last name."
         new_last_name = gets.chomp
         @@contacts.each do |contact|
@@ -68,8 +76,9 @@ class Contact
             end
         end
     end
-
-    def change_email
+    
+    #changing email passed by modify_contact
+    def self.change_email
         puts "Enter new email."
         new_email = gets.chomp
         @@contacts.each do |contact|
@@ -79,7 +88,8 @@ class Contact
         end
     end
 
-    def change_notes
+    #changing notes passed by modify_contact
+    def self.change_notes
         puts "Enter new notes."
         new_notes = gets.chomp
         @@contacts.each do |contact|
@@ -88,13 +98,15 @@ class Contact
             end
         end
     end
-
+ 
+    #displaying all contacts
     def self.display_all_contact
         @@contacts.each do |contact|
             puts "#{contact.first_name}, #{contact.last_name}, #{contact.email}, #{contact.notes}, #{contact.id}"
         end
     end
 
+    #display specific contact using id
     def self.display_contact
         puts "Enter ID of contact you would like to display."
         id_check = gets.to_i
@@ -105,6 +117,7 @@ class Contact
         end
     end
 
+    #display attr by asking user which attr to chose then display attr for each contact
     def self.display_attribute
         puts "Enter the Information you would like to display for each contact."
         puts "first names, last names, emails, or notes"
@@ -128,6 +141,7 @@ class Contact
         end
     end
 
+    #deleting contact based off of id selected
     def self.delete_contact
         puts "Please enter the ID of the contact you would like to delete."
         id_check = gets.to_i

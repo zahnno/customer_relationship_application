@@ -2,15 +2,18 @@ require_relative "contact.rb"
 
 class CRM
    
+   #initializing CRM to run
    def initialize(name)
    	@name = name
    end
    
+   #self run after file is opened
    def self.run (name)
    	crm = CRM.new(name)
    	crm.main_menu
    end
    
+   #main menu puts options and passes input to other methods
    def main_menu
    	puts "1) Add Contact"
     puts "2) Modify Contact"
@@ -23,22 +26,24 @@ class CRM
     choice = gets.to_i
     num_select(choice)
    end
-
+    
+   #passing main menu options to specific methods
    def num_select (choice)
-   	case choice 
-   	when 1 then add_contact
-   	when 2 then modify_contact
-   	when 3 then display_all_contact
-    when 4 then display_contact
-    when 5 then display_attribute
-    when 6 then delete_contact
-    when 7 then return
-    end
-
+   	 case choice 
+   	 when 1 then add_contact
+   	 when 2 then Contact.modify_contact_check
+   	 when 3 then Contact.display_all_contact
+     when 4 then Contact.display_contact
+     when 5 then Contact.display_attribute
+     when 6 then Contact.delete_contact
+     when 7 then return
+     end
+     
     main_menu
 
    end
-
+    
+    #accepting input from user and creating a contact passing to Contact class
     def add_contact
       puts "Enter first name: "
       first_name = gets.chomp
@@ -49,26 +54,6 @@ class CRM
       puts "Enter notes: "
       notes = gets.chomp
       Contact.create(first_name, last_name, email: email, notes: notes)
-    end
-
-    def modify_contact
-    	Contact.modify_contact
-    end
-
-    def display_all_contact
-    	Contact.display_all_contact
-    end
-
-    def display_contact
-    	Contact.display_contact
-    end
-
-    def display_attribute
-    	Contact.display_attribute
-    end
-
-    def delete_contact
-    	Contact.delete_contact
     end
 end
 
